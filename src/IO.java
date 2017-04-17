@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class IO {
+public class IO implements java.io.Serializable {
     private String response;
 
     IO() {

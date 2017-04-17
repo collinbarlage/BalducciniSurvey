@@ -1,9 +1,15 @@
+import java.io.*;
 import java.util.Vector;
 
-public class Test extends IO {
+public class Test implements java.io.Serializable {
+    IO io = new IO();
     private String name;
     private boolean gradeable;
     private Vector<Question> questions = new Vector<Question>();
+
+    public Test() {
+        //Default for loading
+    }
 
     public Test(String surveyName) {
         name = surveyName;
@@ -11,7 +17,6 @@ public class Test extends IO {
     }
 
     public void makeTest() {
-        IO io = new IO();
         while(true) {
 
             io.prompt("Add a question:\n[1]\tTrue/False\n[2]\tMultiple Choice\n[3]\tShort Answer" +
@@ -22,8 +27,8 @@ public class Test extends IO {
 
                 case "2": //Multiple Choice
                     MultipleChoice newMc = new MultipleChoice();
-                    newMc.makeQuestion();
-                    this.addQuestion(newMc);
+                    newMc.makeQuestion(); //Prompt user for question
+                    this.addQuestion(newMc); //Add this question to test/survey
                     break;
 
                 case "3": //Short Answer
@@ -51,15 +56,53 @@ public class Test extends IO {
     }
 
     public void display() {
-        IO io = new IO();
-
         io.outputln("\n\n"+this.getType()+" "+this.getName()+"\n");
         for(int i=0; i<questions.size(); i++)
             questions.elementAt(i).display();
     }
 
+    public void save() {
+        try {
+            FileOutputStream file = new FileOutputStream("saves/"+name+".tst");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this);
+            out.close();
+            file.close();
+            io.outputln("Saved "+getType()+" "+name+" in /saves/"+name+".tst");
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public static Test load(String fileName) {
+        IO io = new IO();
+        io.outputln("Loading...");
+        Test loadTest = null;
+        try {
+            FileInputStream fileIn = new FileInputStream("saves/"+fileName);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            loadTest = (Test) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+            return null;
+        }catch(ClassNotFoundException c) {
+            io.outputln("File not found :(");
+            c.printStackTrace();
+            return null;
+        }
+        io.outputln(loadTest.getType()+" "+loadTest.getName()+" Loaded!");
+        return loadTest;
+    }
+
+
     public void addQuestion(Question q) {
         questions.add(q);
+    }
+
+    public Vector<Question> getQuestions() {
+        return questions;
     }
 
     public String getName() {
@@ -76,4 +119,9 @@ public class Test extends IO {
         else
             return "Test";
     }
+
+    public boolean isTest() {
+        return gradeable;
+    }
+
 }

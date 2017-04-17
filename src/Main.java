@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 
@@ -37,33 +38,38 @@ public class Main {
                 case "1": //Create new
                     io.prompt("Enter "+mode+" name:");
                     Test newTest = new Test(io.response());
-
-                    newTest.makeTest();
-
+                    newTest.makeTest(); //Prompt creator to add questions
+                    //Display newly created survey and SAVE
                     newTest.display();
+                    newTest.save();
 
                     if (mode.equals("survey"))
                         newTest.typeSurvey();
                     break;
+
                 case "2": //Display
                     if (mode.equals("survey")) {
                         System.out.println("wat");
                     }
                     break;
+
                 case "3": //Load
-                    if (mode.equals("survey")) {
-                        System.out.println("wat");
-                    }
+                    //getAllTests/Surveys
+                    Test loadTest = Test.load("x.tst");
+                    loadTest.display();
                     break;
+
                 case "4": //Save
                     if (mode.equals("survey")) {
                         System.out.println("wat");
                     }
                     break;
+
                 case "5": //Quit
                     System.out.println("See ya ~~\n");
                     System.exit(0);
                     break;
+
                 default:
                     System.out.println(io.response() + " is not a valid option :(");
                     error = true;
@@ -71,4 +77,8 @@ public class Main {
             }
         }
     }
+    public void getAllFiles() {
+
+    }
+
 }
