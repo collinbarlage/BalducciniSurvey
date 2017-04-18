@@ -1,7 +1,3 @@
-import java.io.*;
-import java.util.Scanner;
-
-
 public class Main {
 
     public static void main(String[] args) {
@@ -10,9 +6,11 @@ public class Main {
 
         String mode = "N/A";
         boolean error = true;
+        Survey newSurvey = new Survey(); //Placeholder for surveys
+        Test newTest     = new Test();   //Placeholder for Tests
 
-        System.out.println(" B A L D U C C I N I  S U R V E Y\n----------------------------------\n");
-        System.out.println("Enter a corresponding number to access menu items:\n");
+        io.outputln(" B A L D U C C I N I  S U R V E Y\n----------------------------------\n");
+        io.outputln("Enter a corresponding number to access menu items:\n");
         
         while(error) {
             error = false;
@@ -31,54 +29,63 @@ public class Main {
         error = true;
         while(error) {
             error = false;
-            io.outputln("[1]\tCreate new "+mode+"\n[2]\tDisplay "+mode+"\n[3]\tLoad "+mode);
-            io.prompt("[4]\tSave "+mode+"\n[5]\tQuit");
+            do {
+                io.outputln("[1]\tCreate new "+mode+"\n[2]\tDisplay "+mode+"\n[3]\tLoad "+mode);
+                io.prompt("[4]\tSave "+mode+"\n[5]\tQuit");
 
-            switch (io.response()) {
-                case "1": //Create new
-                    io.prompt("Enter "+mode+" name:");
-                    Test newTest = new Test(io.response());
-                    newTest.makeTest(); //Prompt creator to add questions
-                    //Display newly created survey and SAVE
-                    newTest.display();
-                    newTest.save();
+                switch (io.response()) {
+                    case "1": //Create new
+                        io.prompt("Enter " + mode + " name:");
+                        if(mode.equals("survey")) {
+                            newSurvey = new Survey(io.response());
+                            newSurvey.makeSurvey(); //Prompt creator to add questions
+                        }
+                        else {
+                            newTest = new Test(io.response());
+                            newTest.makeSurvey();
+                        }
+                        break;
 
-                    if (mode.equals("survey"))
-                        newTest.typeSurvey();
-                    break;
+                    case "2": //Display
+                        if (mode.equals("survey")) {
+                            newSurvey.display();
+                        }
+                        else {
+                            newTest.display();
+                        }
+                        break;
 
-                case "2": //Display
-                    if (mode.equals("survey")) {
-                        System.out.println("wat");
-                    }
-                    break;
+                    case "3": //Load
+                        //getAllSurveys
+                        if (mode.equals("survey")) {
+                            newSurvey = Survey.load("x.srv");
+                        }
+                        else {
+                            newTest = Test.load("x.tst");
+                        }
+                        break;
 
-                case "3": //Load
-                    //getAllTests/Surveys
-                    Test loadTest = Test.load("x.tst");
-                    loadTest.display();
-                    break;
+                    case "4": //Save
+                        if (mode.equals("survey")) {
+                            newSurvey.save();
+                        }
+                        else {
+                            newTest.save();
+                        }
+                        break;
 
-                case "4": //Save
-                    if (mode.equals("survey")) {
-                        System.out.println("wat");
-                    }
-                    break;
+                    case "5": //Quit
+                        System.out.println("See ya ~~\n");
+                        System.exit(0);
+                        break;
 
-                case "5": //Quit
-                    System.out.println("See ya ~~\n");
-                    System.exit(0);
-                    break;
-
-                default:
-                    System.out.println(io.response() + " is not a valid option :(");
-                    error = true;
-                    break;
-            }
+                    default:
+                        System.out.println(io.response() + " is not a valid option :(");
+                        error = true;
+                        break;
+                }
+            } while (!io.response().equals("5"));
         }
-    }
-    public void getAllFiles() {
-
     }
 
 }

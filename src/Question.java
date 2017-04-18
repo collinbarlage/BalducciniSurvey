@@ -1,5 +1,6 @@
 public abstract class Question implements java.io.Serializable {
     private String prompt;
+    IO io = new IO();
 
 
     public String getPrompt() {
