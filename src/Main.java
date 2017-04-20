@@ -66,12 +66,10 @@ public class Main {
                         break;
 
                     case "4": //Save
-                        if (mode.equals("survey")) {
+                        if (mode.equals("survey"))
                             newSurvey.save();
-                        }
-                        else {
+                        else
                             newTest.save();
-                        }
                         break;
 
                     case "5": //Quit

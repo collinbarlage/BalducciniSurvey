@@ -35,7 +35,7 @@ public class Test extends Survey implements java.io.Serializable {
             c.printStackTrace();
             return null;
         }
-        io.outputln("Survey "+ loadSurvey.getName()+" Loaded!");
+        io.outputln("Test "+ loadSurvey.getName()+" Loaded!");
         return loadSurvey;
     }
 }

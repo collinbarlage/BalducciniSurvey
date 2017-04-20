@@ -11,7 +11,7 @@ public class MultipleChoice extends Question implements java.io.Serializable {
         if(!isSurvey)
             addCorrectChoice();
         else
-            io.prompt("\tEnter a choice for this question: (enter nothing when finished)");
+            io.prompt("\tEnter choices for this question: (enter nothing when finished)");
         while(!io.response().equals("")) {
             this.addChoices(io.response());
             io.prompt();
@@ -19,8 +19,12 @@ public class MultipleChoice extends Question implements java.io.Serializable {
     }
 
     private void addCorrectChoice() {
-        io.prompt("\tEnter correct choice(s):");
+        io.prompt("\tEnter correct choice(s): (enter nothing when finished)");
         addCorrectChoices(io.response());
+        while(!io.response().equals("")) {
+            addCorrectChoices(io.response());
+            io.prompt();
+        }
         io.prompt("\tEnter incorrect choices:");
     }
 
