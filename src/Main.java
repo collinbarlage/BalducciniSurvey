@@ -4,7 +4,7 @@ public class Main {
 
         IO io = new IO();
 
-        String mode = "N/A";
+        String mode = "N/A", fileName;
         boolean error = true;
         Survey newSurvey = new Survey(); //Placeholder for surveys
         Test newTest     = new Test();   //Placeholder for Tests
@@ -47,21 +47,21 @@ public class Main {
                         break;
 
                     case "2": //Display
-                        if (mode.equals("survey")) {
+                        if (mode.equals("survey"))
                             newSurvey.display();
-                        }
-                        else {
+                        else
                             newTest.display();
-                        }
                         break;
 
                     case "3": //Load
                         //getAllSurveys
                         if (mode.equals("survey")) {
-                            newSurvey = Survey.load("x.srv");
+                            fileName = newSurvey.getAllFiles();
+                            newSurvey = Survey.load(fileName);
                         }
                         else {
-                            newTest = Test.load("x.tst");
+                            fileName = newTest.getAllFiles();
+                            newTest = Test.load(fileName);
                         }
                         break;
 

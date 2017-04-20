@@ -103,6 +103,30 @@ public class Survey implements java.io.Serializable {
         return loadSurvey;
     }
 
+    public String getAllFiles()  {
+        File saves = new File("saves/");
+        File[] allFiles = saves.listFiles();
+        Vector<Integer> availableFiles = new Vector<Integer>();
+
+        io.outputln("Select a "+type+" to load:");
+        for(int i=0; i<allFiles.length; i++) {
+            if (allFiles[i].getName().substring(allFiles[i].getName().length()-4).equals(extention)) {
+                io.outputln("["+i+"]\t" + allFiles[i].getName());
+                availableFiles.add(i);
+            }
+        }
+        while(true) {
+            io.prompt();
+            if(!io.response().matches("^-?\\d+$"))
+                io.outputln("Enter a number, silly");
+            else if(!availableFiles.contains(Integer.parseInt(io.response())))
+                io.outputln("File not found :(\nEnter a number from the list above");
+            else
+                break;
+        }
+        return  allFiles[Integer.parseInt(io.response())].getName(); //return name of file
+    }
+
 
     public void addQuestion(Question q) {
         questions.add(q);
