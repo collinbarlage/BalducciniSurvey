@@ -24,9 +24,9 @@ public class Survey implements java.io.Serializable {
 
     public void makeSurvey() {
         while(true) {
-
             io.prompt("Add a question:\n[1]\tTrue/False\n[2]\tMultiple Choice\n[3]\tShort Answer" +
                     "\n[4]\tEssay\n[5]\tRanking\n[6]\tMatching\n[7]\tDone");
+
             switch (io.response()) {
                 case "1": //TrueFalse
                     TrueFalse newTf = new TrueFalse(isSurvey);
@@ -39,6 +39,8 @@ public class Survey implements java.io.Serializable {
                     break;
 
                 case "3": //Short Answer
+                    ShortAnswer newSa = new ShortAnswer(isSurvey);
+                    this.addQuestion(newSa);
                     break;
 
                 case "4": //Essay
@@ -63,7 +65,7 @@ public class Survey implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\n\nSurvey "+this.getName()+"\n");
+        io.outputln("\n\n"+type+" "+this.getName()+"\n");
         for(int i=0; i<questions.size(); i++)
             questions.elementAt(i).display();
     }
@@ -130,6 +132,7 @@ public class Survey implements java.io.Serializable {
 
     public void addQuestion(Question q) {
         questions.add(q);
+        io.outputln("Question added\n");
     }
 
     public Vector<Question> getQuestions() {
