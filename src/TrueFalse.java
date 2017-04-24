@@ -20,7 +20,7 @@ public class TrueFalse extends Question implements java.io.Serializable {
 
     public void display() {
         io.outputln("\tTrue/False:\n\t"+this.getPrompt());
-        io.outputln("\t\t(T)\n\t\t(F)\n");
+        io.outputln("\t\t(T)/(F)\n");
     }
 
     public boolean getCorrectChoice() {

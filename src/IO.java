@@ -12,6 +12,10 @@ public class IO implements java.io.Serializable {
     }
 
 
+    public void outputColumns(String x, String y) {
+        System.out.printf("%-36.36s  %-36.36s%n", x, y);
+    }
+
     public void outputln(String x){
         System.out.println(x);
     }

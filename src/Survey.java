@@ -44,15 +44,22 @@ public class Survey implements java.io.Serializable {
                     break;
 
                 case "4": //Essay
+                    Essay newE = new Essay();
+                    this.addQuestion(newE);
                     break;
 
                 case "5": //Ranking
+                    Ranking newR = new Ranking(isSurvey);
+                    this.addQuestion(newR);
                     break;
 
                 case "6": //Matching
+                    Matching newM = new Matching(isSurvey);
+                    this.addQuestion(newM);
                     break;
 
-                case "7": //exit
+                case "7":
+                    //exit
                     break;
 
                 default:
