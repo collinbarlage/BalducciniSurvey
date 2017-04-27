@@ -9,7 +9,8 @@ public class Main {
         Survey newSurvey = new Survey(); //Placeholder for surveys
         Test newTest     = new Test();   //Placeholder for Tests
 
-        io.outputln(" B A L D U C C I N I  S U R V E Y\n----------------------------------\n");
+        io.outputln("\n B A L D U C C I N I  S U R V E Y\n----------------------------------");
+        io.outputln("      made with <3 by Collin  \n");
         io.outputln("Enter a corresponding number to access menu items:\n");
         
         while(error) {
@@ -73,7 +74,7 @@ public class Main {
                         break;
 
                     case "5": //Quit
-                        System.out.println("See ya ~~\n");
+                        System.out.println("See ya!\n");
                         System.exit(0);
                         break;
 
