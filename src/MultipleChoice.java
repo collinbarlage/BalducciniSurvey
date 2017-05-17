@@ -29,7 +29,7 @@ public class MultipleChoice extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\tMultiple Choice:\n\t"+this.getPrompt());
+        io.outputln("Multiple Choice:\n\t"+this.getPrompt());
         for(int i=0; i<choices.size(); i++) {
             io.outputln("\t\t("+toLetter(i)+") "+choices.elementAt(i));
         }

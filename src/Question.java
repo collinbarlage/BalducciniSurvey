@@ -14,7 +14,22 @@ public abstract class Question implements java.io.Serializable {
         return String.valueOf((char)(i + 65));
     }
 
-    public void display() {
+    public void edit() {
+        io.output("Modifying ");
+        this.display();
+        io.prompt("Enter new prompt: (enter nothing to skip)");
+        if(!io.response().equals("")) {
+            prompt = io.response();
+            io.outputln("Prompt set");
+        }
+        this.modify();
+    }
+
+    public void modify() {
+        //
+    }
+
+    public void display()  {
         //
     }
 

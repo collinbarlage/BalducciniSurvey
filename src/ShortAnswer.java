@@ -24,7 +24,7 @@ public class ShortAnswer extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\tShort Answer:\n\t"+this.getPrompt()+"\n");
+        io.outputln("Short Answer:\n\t"+this.getPrompt()+"\n");
     }
 
     private void addCorrectAnswer(String choice)   {

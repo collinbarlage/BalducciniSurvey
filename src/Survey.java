@@ -71,10 +71,30 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    public void edit() {
+        this.display();
+        while(true) {
+            io.prompt("Enter question number to edit a question. Enter nothing to continue:");
+            if(io.response().equals(""))
+                break;
+            else if(!io.response().matches("^-?\\d+$"))
+                io.outputln("Enter a number, silly");
+            else if(io.iResponse() < questions.size()  && io.iResponse() >= 0) {
+                io.output("Noice. You selected ");
+                questions.elementAt(io.iResponse()).display();
+                questions.elementAt(io.iResponse()).edit();
+            }
+            else
+                io.outputln("That's not a question :(");
+        }
+    }
+
     public void display() {
         io.outputln("\n\n"+type+" "+this.getName()+"\n");
-        for(int i=0; i<questions.size(); i++)
+        for(int i=0; i<questions.size(); i++) {
+            io.output("("+i+")\t");
             questions.elementAt(i).display();
+        }
     }
 
     public void save() {
@@ -128,12 +148,12 @@ public class Survey implements java.io.Serializable {
             io.prompt();
             if(!io.response().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
-            else if(!availableFiles.contains(Integer.parseInt(io.response())))
+            else if(!availableFiles.contains(io.iResponse()))
                 io.outputln("File not found :(\nEnter a number from the list above");
             else
                 break;
         }
-        return  allFiles[Integer.parseInt(io.response())].getName(); //return name of file
+        return  allFiles[io.iResponse()].getName(); //return name of file
     }
 
 

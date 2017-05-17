@@ -24,7 +24,7 @@ public class Matching extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\tRanking:\n\t"+this.getPrompt());
+        io.outputln("Ranking:\n\t"+this.getPrompt());
         for(int i=0; i<choicesA.size(); i++) {
             io.outputColumns("\t\t("+toLetter(i)+") "+choicesA.elementAt(i),"("+i+") "+choicesB.elementAt(i));
         }

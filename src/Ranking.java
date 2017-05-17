@@ -15,7 +15,7 @@ public class Ranking extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\tRanking:\n\t"+this.getPrompt());
+        io.outputln("Ranking:\n\t"+this.getPrompt());
         for(int i=0; i<choices.size(); i++) {
             io.outputln("\t\t("+i+") "+choices.elementAt(i));
         }

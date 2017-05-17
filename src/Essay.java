@@ -8,7 +8,7 @@ public class Essay extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("\tEssay:\n\t"+this.getPrompt()+"\n");
+        io.outputln("Essay:\n\t"+this.getPrompt()+"\n");
     }
 
 }

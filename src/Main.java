@@ -30,9 +30,13 @@ public class Main {
         error = true;
         while(error) {
             error = false;
-            do {
-                io.outputln("[1]\tCreate new "+mode+"\n[2]\tDisplay "+mode+"\n[3]\tLoad "+mode);
-                io.prompt("[4]\tSave "+mode+"\n[5]\tQuit");
+            do { //display options
+                io.outputln("[1]\tCreate new "+mode+"\n[2]\tDisplay "+mode+"\n[3]\tLoad "+mode+"\n"+
+                               "[4]\tSave "+mode+"\n[5]\tModify an existing "+mode+"\n[6]\tTake a "+mode+"\n"+
+                               "[7]\tTabulate a "+mode);
+                if (mode.equals("test"))
+                    io.outputln("[8]\tGrade a test");
+                io.prompt("[0]\tQuit");
 
                 switch (io.response()) {
                     case "1": //Create new
@@ -48,6 +52,14 @@ public class Main {
                         break;
 
                     case "2": //Display
+                        if(newSurvey.name == null  &&  mode.equals("survey")){ //load a survey before hand
+                            fileName = newSurvey.getAllFiles();
+                            newSurvey = Survey.load(fileName);
+                        }
+                        if(newTest.name == null  &&  mode.equals("test")){ //load a test before hand
+                            fileName = newTest.getAllFiles();
+                            newTest = Test.load(fileName);
+                        }
                         if (mode.equals("survey"))
                             newSurvey.display();
                         else
@@ -73,7 +85,33 @@ public class Main {
                             newTest.save();
                         break;
 
-                    case "5": //Quit
+
+                    case "5": //Modify
+                        if (mode.equals("survey"))
+                            newSurvey.edit();
+                        else
+                            newTest.edit();
+                        break;
+
+                    case "6": //Take
+
+                        break;
+
+                    case "7": //Tabulate
+
+                        break;
+
+                    case "8": //Grade
+                        if(mode.equals("test")) {
+
+                        }
+                        else {
+                            System.out.println(io.response() + " is not a valid option :'(");
+                            error = true;
+                        }
+                        break;
+
+                    case "0": //Quit
                         System.out.println("See ya!\n");
                         System.exit(0);
                         break;
@@ -83,7 +121,7 @@ public class Main {
                         error = true;
                         break;
                 }
-            } while (!io.response().equals("5"));
+            } while (!io.response().equals("0"));
         }
     }
 

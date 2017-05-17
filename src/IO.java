@@ -4,13 +4,17 @@ public class IO implements java.io.Serializable {
     private String response;
 
     IO() {
-        response = "NO RESPONSE YET";
+        response = "NO_RESPONSE_YET";
     }
 
     public String response() {
         return response;
     }
 
+
+    public int iResponse() {
+        return Integer.parseInt(response);
+    }
 
     public void outputColumns(String x, String y) {
         System.out.printf("%-36.36s  %-36.36s%n", x, y);
