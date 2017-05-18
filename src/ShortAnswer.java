@@ -15,11 +15,18 @@ public class ShortAnswer extends Question implements java.io.Serializable {
     }
 
     private void addCorrectChoice() {
-        io.prompt("\tEnter correct choice(s): (enter nothing when finished)");
-        addCorrectAnswer(io.response());
+        io.prompt("\tEnter correct responses(s): (enter nothing when finished)");
         while(!io.response().equals("")) {
             addCorrectAnswer(io.response());
             io.prompt();
+        }
+    }
+
+    public void modify() {
+        for (int i = 0; i < correctAnswers.size(); i++) {
+            io.prompt("Change response '" + correctAnswers.elementAt(i) + "': (enter nothing to skip)");
+            if (!io.response().equals(""))
+                correctAnswers.set(i, io.response());
         }
     }
 

@@ -32,7 +32,7 @@ public class Main {
             error = false;
             do { //display options
                 io.outputln("[1]\tCreate new "+mode+"\n[2]\tDisplay "+mode+"\n[3]\tLoad "+mode+"\n"+
-                               "[4]\tSave "+mode+"\n[5]\tModify an existing "+mode+"\n[6]\tTake a "+mode+"\n"+
+                               "[4]\tSave "+mode+"\n[5]\tModify existing "+mode+"\n[6]\tTake a "+mode+"\n"+
                                "[7]\tTabulate a "+mode);
                 if (mode.equals("test"))
                     io.outputln("[8]\tGrade a test");
@@ -87,6 +87,14 @@ public class Main {
 
 
                     case "5": //Modify
+                        if(newSurvey.name == null  &&  mode.equals("survey")){ //load a survey before hand
+                            fileName = newSurvey.getAllFiles();
+                            newSurvey = Survey.load(fileName);
+                        }
+                        if(newTest.name == null  &&  mode.equals("test")){ //load a test before hand
+                            fileName = newTest.getAllFiles();
+                            newTest = Test.load(fileName);
+                        }
                         if (mode.equals("survey"))
                             newSurvey.edit();
                         else
@@ -124,5 +132,6 @@ public class Main {
             } while (!io.response().equals("0"));
         }
     }
+
 
 }

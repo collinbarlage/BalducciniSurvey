@@ -23,7 +23,7 @@ public class Survey implements java.io.Serializable {
     }
 
     public void makeSurvey() {
-        while(true) {
+        while (true) {
             io.prompt("Add a question:\n[1]\tTrue/False\n[2]\tMultiple Choice\n[3]\tShort Answer" +
                     "\n[4]\tEssay\n[5]\tRanking\n[6]\tMatching\n[7]\tDone");
 
@@ -66,46 +66,45 @@ public class Survey implements java.io.Serializable {
                     break;
 
             }
-            if(io.response().equals("7"))
+            if (io.response().equals("7"))
                 break;
         }
     }
 
     public void edit() {
         this.display();
-        while(true) {
+        while (true) {
             io.prompt("Enter question number to edit a question. Enter nothing to continue:");
-            if(io.response().equals(""))
+            if (io.response().equals(""))
                 break;
-            else if(!io.response().matches("^-?\\d+$"))
+            else if (!io.response().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
-            else if(io.iResponse() < questions.size()  && io.iResponse() >= 0) {
+            else if (io.iResponse() < questions.size() && io.iResponse() >= 0) {
                 io.output("Noice. You selected ");
                 questions.elementAt(io.iResponse()).display();
                 questions.elementAt(io.iResponse()).edit();
-            }
-            else
+            } else
                 io.outputln("That's not a question :(");
         }
     }
 
     public void display() {
-        io.outputln("\n\n"+type+" "+this.getName()+"\n");
-        for(int i=0; i<questions.size(); i++) {
-            io.output("("+i+")\t");
+        io.outputln("\n\n" + type + " " + this.getName() + "\n");
+        for (int i = 0; i < questions.size(); i++) {
+            io.output("(" + i + ")\t");
             questions.elementAt(i).display();
         }
     }
 
     public void save() {
         try {
-            FileOutputStream file = new FileOutputStream("saves/"+name+extention);
+            FileOutputStream file = new FileOutputStream("saves/" + name + extention);
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(this);
             out.close();
             file.close();
-            io.outputln("Saved "+type+" "+name+" in /saves/"+name+extention);
-        }catch(IOException i) {
+            io.outputln("Saved " + type + " " + name + " in /saves/" + name + extention);
+        } catch (IOException i) {
             i.printStackTrace();
         }
     }
@@ -115,45 +114,45 @@ public class Survey implements java.io.Serializable {
         io.outputln("Loading...");
         Survey loadSurvey = null;
         try {
-            FileInputStream fileIn = new FileInputStream("saves/"+fileName);
+            FileInputStream fileIn = new FileInputStream("saves/" + fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             loadSurvey = (Survey) in.readObject();
             in.close();
             fileIn.close();
-        }catch(IOException i) {
+        } catch (IOException i) {
             i.printStackTrace();
             return null;
-        }catch(ClassNotFoundException c) {
+        } catch (ClassNotFoundException c) {
             io.outputln("File not found :(");
             c.printStackTrace();
             return null;
         }
-        io.outputln("Survey "+ loadSurvey.getName()+" Loaded!");
+        io.outputln("Survey " + loadSurvey.getName() + " Loaded!");
         return loadSurvey;
     }
 
-    public String getAllFiles()  {
+    public String getAllFiles() {
         File saves = new File("saves/");
         File[] allFiles = saves.listFiles();
         Vector<Integer> availableFiles = new Vector<Integer>();
 
-        io.outputln("Select a "+type+" to load:");
-        for(int i=0; i<allFiles.length; i++) {
-            if (allFiles[i].getName().substring(allFiles[i].getName().length()-4).equals(extention)) {
-                io.outputln("["+i+"]\t" + allFiles[i].getName());
+        io.outputln("Select a " + type + " to load:");
+        for (int i = 0; i < allFiles.length; i++) {
+            if (allFiles[i].getName().substring(allFiles[i].getName().length() - 4).equals(extention)) {
+                io.outputln("[" + i + "]\t" + allFiles[i].getName());
                 availableFiles.add(i);
             }
         }
-        while(true) {
+        while (true) {
             io.prompt();
-            if(!io.response().matches("^-?\\d+$"))
+            if (!io.response().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
-            else if(!availableFiles.contains(io.iResponse()))
+            else if (!availableFiles.contains(io.iResponse()))
                 io.outputln("File not found :(\nEnter a number from the list above");
             else
                 break;
         }
-        return  allFiles[io.iResponse()].getName(); //return name of file
+        return allFiles[io.iResponse()].getName(); //return name of file
     }
 
 
@@ -169,8 +168,6 @@ public class Survey implements java.io.Serializable {
     public String getName() {
         return name;
     }
-
-
 
 
 }
