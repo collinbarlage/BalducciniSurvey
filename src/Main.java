@@ -12,17 +12,17 @@ public class Main {
         io.outputln("\n B A L D U C C I N I  S U R V E Y\n----------------------------------");
         io.outputln("      made with <3 by Collin  \n");
         io.outputln("Enter a corresponding number to access menu items:\n");
-        
+
         while(error) {
             error = false;
             io.prompt("[1]\tSurvey Mode (no grading)\n[2]\tTest Mode   (grading enabled)");
 
-            if (io.response().equals("1"))
+            if (io.getInput().equals("1"))
                 mode = "survey";
-            else if (io.response().equals("2"))
+            else if (io.getInput().equals("2"))
                 mode = "test";
             else {
-                System.out.println(io.response() + " is not a valid option :(");
+                System.out.println(io.getInput() + " is not a valid option :(");
                 error = true;
             }
         }
@@ -38,15 +38,15 @@ public class Main {
                     io.outputln("[8]\tGrade a test");
                 io.prompt("[0]\tQuit");
 
-                switch (io.response()) {
+                switch (io.getInput()) {
                     case "1": //Create new
                         io.prompt("Enter " + mode + " name:");
                         if(mode.equals("survey")) {
-                            newSurvey = new Survey(io.response());
+                            newSurvey = new Survey(io.getInput());
                             newSurvey.makeSurvey(); //Prompt creator to add questions
                         }
                         else {
-                            newTest = new Test(io.response());
+                            newTest = new Test(io.getInput());
                             newTest.makeSurvey();
                         }
                         break;
@@ -114,7 +114,7 @@ public class Main {
 
                         }
                         else {
-                            System.out.println(io.response() + " is not a valid option :'(");
+                            System.out.println(io.getInput() + " is not a valid option :'(");
                             error = true;
                         }
                         break;
@@ -125,11 +125,11 @@ public class Main {
                         break;
 
                     default:
-                        System.out.println(io.response() + " is not a valid option :(");
+                        System.out.println(io.getInput() + " is not a valid option :(");
                         error = true;
                         break;
                 }
-            } while (!io.response().equals("0"));
+            } while (!io.getInput().equals("0"));
         }
     }
 

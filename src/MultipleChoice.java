@@ -1,6 +1,5 @@
 import java.util.Collections;
 import java.util.Vector;
-import java.util.Collection;
 
 public class MultipleChoice extends Question implements java.io.Serializable {
     private Vector<String> choices = new Vector<String>();
@@ -9,14 +8,14 @@ public class MultipleChoice extends Question implements java.io.Serializable {
 
     public MultipleChoice(boolean isSurvey) {
         io.prompt("\tEnter the question prompt:");
-        this.setPrompt(io.response());
+        this.setPrompt(io.getInput());
 
         if (!isSurvey)
             addCorrectChoice();
         else
             io.prompt("\tEnter choices for this question: (enter nothing when finished)");
-        while (!io.response().equals("")) {
-            this.addChoices(io.response());
+        while (!io.getInput().equals("")) {
+            this.addChoices(io.getInput());
             io.prompt();
         }
         //Randomize order
@@ -27,8 +26,8 @@ public class MultipleChoice extends Question implements java.io.Serializable {
 
     private void addCorrectChoice() {
         io.prompt("\tEnter correct choice(s): (enter nothing when finished)");
-        while (!io.response().equals("")) {
-            addCorrectChoices(io.response());
+        while (!io.getInput().equals("")) {
+            addCorrectChoices(io.getInput());
             io.prompt();
         }
         io.prompt("\tEnter incorrect choices:");
@@ -37,13 +36,13 @@ public class MultipleChoice extends Question implements java.io.Serializable {
     public void modify() {
         for (int i = 0; i < correctChoices.size(); i++) {
             io.prompt("Change correct choice '" + correctChoices.elementAt(i) + "': (enter nothing to skip)");
-            if (!io.response().equals(""))
-                correctChoices.set(i, io.response());
+            if (!io.getInput().equals(""))
+                correctChoices.set(i, io.getInput());
         }
         for (int i = 0; i < choices.size(); i++) {
             io.prompt("Change choice '" + choices.elementAt(i) + "': (enter nothing to skip)");
-            if (!io.response().equals(""))
-                choices.set(i, io.response());
+            if (!io.getInput().equals(""))
+                choices.set(i, io.getInput());
         }
         //reset all choices
         displayChoices = new Vector<>();

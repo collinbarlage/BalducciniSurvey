@@ -7,7 +7,7 @@ public class IO implements java.io.Serializable {
         response = "NO_RESPONSE_YET";
     }
 
-    public String response() {
+    public String getInput() {
         return response;
     }
 

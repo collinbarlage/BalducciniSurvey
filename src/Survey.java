@@ -27,7 +27,7 @@ public class Survey implements java.io.Serializable {
             io.prompt("Add a question:\n[1]\tTrue/False\n[2]\tMultiple Choice\n[3]\tShort Answer" +
                     "\n[4]\tEssay\n[5]\tRanking\n[6]\tMatching\n[7]\tDone");
 
-            switch (io.response()) {
+            switch (io.getInput()) {
                 case "1": //TrueFalse
                     TrueFalse newTf = new TrueFalse(isSurvey);
                     this.addQuestion(newTf);
@@ -66,7 +66,7 @@ public class Survey implements java.io.Serializable {
                     break;
 
             }
-            if (io.response().equals("7"))
+            if (io.getInput().equals("7"))
                 break;
         }
     }
@@ -75,9 +75,9 @@ public class Survey implements java.io.Serializable {
         this.display();
         while (true) {
             io.prompt("Enter question number to edit a question. Enter nothing to continue:");
-            if (io.response().equals(""))
+            if (io.getInput().equals(""))
                 break;
-            else if (!io.response().matches("^-?\\d+$"))
+            else if (!io.getInput().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
             else if (io.iResponse() < questions.size() && io.iResponse() >= 0) {
                 io.output("Noice. You selected ");
@@ -145,7 +145,7 @@ public class Survey implements java.io.Serializable {
         }
         while (true) {
             io.prompt();
-            if (!io.response().matches("^-?\\d+$"))
+            if (!io.getInput().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
             else if (!availableFiles.contains(io.iResponse()))
                 io.outputln("File not found :(\nEnter a number from the list above");

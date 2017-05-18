@@ -19,8 +19,8 @@ public abstract class Question implements java.io.Serializable {
         io.output("Modifying ");
         this.display();
         io.prompt("Enter new prompt: (enter nothing to skip)");
-        if (!io.response().equals("")) {
-            prompt = io.response();
+        if (!io.getInput().equals("")) {
+            prompt = io.getInput();
             io.outputln("Prompt set");
         }
         this.modify();

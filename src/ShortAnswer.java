@@ -8,7 +8,7 @@ public class ShortAnswer extends Question implements java.io.Serializable {
 
     public ShortAnswer(boolean isSurvey) {
         io.prompt("\tEnter the question prompt:");
-        this.setPrompt(io.response());
+        this.setPrompt(io.getInput());
 
         if(!isSurvey)
             addCorrectChoice();
@@ -16,17 +16,17 @@ public class ShortAnswer extends Question implements java.io.Serializable {
 
     private void addCorrectChoice() {
         io.prompt("\tEnter correct responses(s): (enter nothing when finished)");
-        while(!io.response().equals("")) {
-            addCorrectAnswer(io.response());
+        while(!io.getInput().equals("")) {
+            addCorrectAnswer(io.getInput());
             io.prompt();
         }
     }
 
     public void modify() {
         for (int i = 0; i < correctAnswers.size(); i++) {
-            io.prompt("Change response '" + correctAnswers.elementAt(i) + "': (enter nothing to skip)");
-            if (!io.response().equals(""))
-                correctAnswers.set(i, io.response());
+            io.prompt("Change getInput '" + correctAnswers.elementAt(i) + "': (enter nothing to skip)");
+            if (!io.getInput().equals(""))
+                correctAnswers.set(i, io.getInput());
         }
     }
 
