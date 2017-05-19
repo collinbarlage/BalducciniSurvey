@@ -75,14 +75,25 @@ public class Survey implements java.io.Serializable {
 
     public void take() {
         io.prompt("Enter your name:");
-        String name = io.getInput();
-        Response res = new Response(name);
-        io.outputln("\n\n----------------------------------------------\n"+type+" "+this.getName()+"\n");
-        for(int i=0; i<questions.size(); i++) {
+        String userName = io.getInput();
+        Response res = new Response(userName, name);
+        io.outputln("\n\n----------------------------------------------\n" + type + " " + this.getName() + "\n");
+        for (int i = 0; i < questions.size(); i++) {
             questions.elementAt(i).display();
             questions.elementAt(i).take(res);
         }
-        io.outputln("Thanks "+name+". You did a great job\n");
+        io.outputln("Saving response...");
+        try {
+            FileOutputStream file = new FileOutputStream("responses/" + userName + "_" + name + extention + "r");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(res);
+            out.close();
+            file.close();
+            io.outputln("Saved " + type + " response " + " in /responses/" + userName + "_" + name + extention + "r");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        io.outputln("Thanks " + userName + ". You did a great job\n");
     }
 
     public void edit() {

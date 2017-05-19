@@ -35,7 +35,7 @@ public class Main {
                                "[4]\tSave "+mode+"\n[5]\tModify existing "+mode+"\n[6]\tTake a "+mode+"\n"+
                                "[7]\tTabulate a "+mode);
                 if (mode.equals("test"))
-                    io.outputln("[8]\tGrade a test");
+                    io.outputln("[8]\tGrade a response");
                 io.prompt("[0]\tQuit");
 
                 switch (io.getInput()) {
@@ -114,7 +114,9 @@ public class Main {
 
                     case "8": //Grade
                         if(mode.equals("test")) {
-
+                            Response res = newTest.loadResponse();
+                            newTest = Test.load(res.getSurveyName()+".tst");
+                            res.grade(newTest);
                         }
                         else {
                             System.out.println(io.getInput() + " is not a valid option :'(");

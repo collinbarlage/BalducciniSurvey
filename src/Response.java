@@ -2,11 +2,14 @@ import java.io.Serializable;
 import java.util.Vector;
 
 public class Response implements java.io.Serializable {
+    IO io = new IO();
     private Vector<String> responses = new Vector<>();
     private String name;
+    private String surveyName;
 
-    public Response(String n) {
+    public Response(String n, String s) {
         name = n;
+        surveyName = s;
     }
 
     public String getString() {
@@ -19,6 +22,11 @@ public class Response implements java.io.Serializable {
 
     public void addResponse(String s) {
         responses.add(s);
+    }
+
+    public void grade(Test test) {
+        io.outputln("I'm about to grade "+test.getName());
+        //TODO
     }
 
     public boolean checkOne(String correct) {
@@ -43,5 +51,9 @@ public class Response implements java.io.Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getSurveyName() {
+        return surveyName;
     }
 }
