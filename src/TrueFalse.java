@@ -1,6 +1,5 @@
 
 public class TrueFalse extends Question implements java.io.Serializable {
-    boolean correctChoice;
 
     public TrueFalse(boolean isSurvey) {
         io.prompt("\tEnter true/false question prompt:");
@@ -13,9 +12,9 @@ public class TrueFalse extends Question implements java.io.Serializable {
     private void addCorrectChoice() {
         io.prompt("\tEnter correct choice: ('T' or 'F')");
         if (io.getInput().equals("T") || io.getInput().equals("t"))
-            correctChoice = true;
+            correctChoices.add("T");
         else
-            correctChoice = false;
+            correctChoices.add("F");
     }
 
     public void display() {
@@ -24,16 +23,18 @@ public class TrueFalse extends Question implements java.io.Serializable {
     }
 
     public void modify() {
-        io.prompt("\tChange correct choice " + correctChoice + " : ('T' or 'F' or nothing to skip)");
+        io.prompt("\tChange correct choice " + correctChoices.elementAt(0) + " : ('T' or 'F' or nothing to skip)");
         if (io.getInput().equals("T") || io.getInput().equals("t"))
-            correctChoice = true;
+            correctChoices.set(0, "T");
         else if (io.getInput().equals(""))
-            correctChoice = correctChoice; //null on purpose
+            correctChoices = correctChoices; //null on purpose
         else
-            correctChoice = false;
+            correctChoices.set(0, "F");
+
     }
 
-    public boolean getCorrectChoice() {
-        return correctChoice;
-    }
+//    public void take(Response res) {
+//        io.prompt();
+//        res.addResponse(io.getInput());
+//    }
 }

@@ -58,5 +58,13 @@ public class Matching extends Question implements java.io.Serializable {
         io.output("\n");
     }
 
+    public void take(Response res) {
+        System.out.println("OverRiding!");
+        for (int i = 0; i < choicesA.size(); i++) {
+            io.prompt("Enter number for "+toLetter(i));
+            res.addResponse(io.getInput());
+        }
+    }
+
 
 }

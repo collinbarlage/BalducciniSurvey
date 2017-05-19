@@ -4,7 +4,6 @@ import java.util.Vector;
  * Created by 616 on 4/20/2017.
  */
 public class ShortAnswer extends Question implements java.io.Serializable {
-    private Vector<String> correctAnswers = new Vector<String>();
 
     public ShortAnswer(boolean isSurvey) {
         io.prompt("\tEnter the question prompt:");
@@ -23,10 +22,10 @@ public class ShortAnswer extends Question implements java.io.Serializable {
     }
 
     public void modify() {
-        for (int i = 0; i < correctAnswers.size(); i++) {
-            io.prompt("Change getInput '" + correctAnswers.elementAt(i) + "': (enter nothing to skip)");
+        for (int i = 0; i < correctChoices.size(); i++) {
+            io.prompt("Change getInput '" + correctChoices.elementAt(i) + "': (enter nothing to skip)");
             if (!io.getInput().equals(""))
-                correctAnswers.set(i, io.getInput());
+                correctChoices.set(i, io.getInput());
         }
     }
 
@@ -35,7 +34,12 @@ public class ShortAnswer extends Question implements java.io.Serializable {
     }
 
     private void addCorrectAnswer(String choice)   {
-        correctAnswers.add(choice);
+        correctChoices.add(choice);
+    }
+
+    public void take(Response res) {
+        io.prompt();
+        res.addResponse(io.getInput());
     }
 }
 

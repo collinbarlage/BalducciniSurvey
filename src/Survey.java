@@ -1,3 +1,5 @@
+import com.sun.org.apache.regexp.internal.RESyntaxException;
+
 import java.io.*;
 import java.util.Vector;
 
@@ -71,6 +73,18 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    public void take() {
+        io.prompt("Enter your name:");
+        String name = io.getInput();
+        Response res = new Response(name);
+        io.outputln("\n\n----------------------------------------------\n"+type+" "+this.getName()+"\n");
+        for(int i=0; i<questions.size(); i++) {
+            questions.elementAt(i).display();
+            questions.elementAt(i).take(res);
+        }
+        io.outputln("Thanks "+name+". You did a great job\n");
+    }
+
     public void edit() {
         this.display();
         while (true) {
@@ -89,6 +103,7 @@ public class Survey implements java.io.Serializable {
     }
 
     public void display() {
+        io.outputln("\n\n----------------------------------------------");
         io.outputln("\n\n" + type + " " + this.getName() + "\n");
         for (int i = 0; i < questions.size(); i++) {
             io.output("(" + i + ")\t");

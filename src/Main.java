@@ -102,7 +102,10 @@ public class Main {
                         break;
 
                     case "6": //Take
-
+                        if (mode.equals("survey"))
+                            newSurvey.take();
+                        else
+                            newTest.take();
                         break;
 
                     case "7": //Tabulate

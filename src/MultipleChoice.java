@@ -3,7 +3,6 @@ import java.util.Vector;
 
 public class MultipleChoice extends Question implements java.io.Serializable {
     private Vector<String> choices = new Vector<String>();
-    private Vector<String> correctChoices = new Vector<String>();
     private Vector<String> displayChoices = new Vector<>();
 
     public MultipleChoice(boolean isSurvey) {
@@ -67,7 +66,14 @@ public class MultipleChoice extends Question implements java.io.Serializable {
         correctChoices.add(choice);
     }
 
-    public String getCorrectChoice(int i) {
-        return correctChoices.elementAt(i);
-    }
+//    public void take(Response res) {
+//        for (int i = 0; i < correctChoices.size(); i++) {
+//            io.prompt();
+//            res.addResponse(io.getInput());
+//        }
+//    }
+
+//    public String getCorrectChoice() {
+//
+//    }
 }

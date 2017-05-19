@@ -1,5 +1,9 @@
+import java.util.Vector;
+
 public abstract class Question implements java.io.Serializable {
     private String prompt;
+    protected Vector<String> correctChoices = new Vector<String>();
+
     IO io = new IO();
 
 
@@ -24,6 +28,14 @@ public abstract class Question implements java.io.Serializable {
             io.outputln("Prompt set");
         }
         this.modify();
+    }
+
+    public void take(Response res) {
+        System.out.println("DEFAULT TAKE METHOD!");
+        for (int i = 0; i < correctChoices.size(); i++) {
+            io.prompt();
+            res.addResponse(io.getInput());
+        }
     }
 
     public void modify() {

@@ -2,7 +2,6 @@ import java.util.Collections;
 import java.util.Vector;
 
 public class Ranking extends Question implements java.io.Serializable {
-    private Vector<String> choices = new Vector<String>();
     private Vector<String> displayChoices = new Vector<String>();
 
     public Ranking(boolean isSurvey) {
@@ -14,18 +13,18 @@ public class Ranking extends Question implements java.io.Serializable {
             this.addChoices(io.getInput());
             io.prompt();
         }
-        displayChoices.addAll(choices);
+        displayChoices.addAll(correctChoices);
         Collections.shuffle(displayChoices);
     }
 
     public void modify() {
-        for (int i = 0; i < choices.size(); i++) {
-            io.prompt("Change rankable item "+i+" '" + choices.elementAt(i) + "': (enter nothing to skip)");
+        for (int i = 0; i < correctChoices.size(); i++) {
+            io.prompt("Change rankable item "+i+" '" + correctChoices.elementAt(i) + "': (enter nothing to skip)");
             if (!io.getInput().equals(""))
-                choices.set(i, io.getInput());
+                correctChoices.set(i, io.getInput());
         }
         displayChoices = new Vector<>();
-        displayChoices.addAll(choices);
+        displayChoices.addAll(correctChoices);
         Collections.shuffle(displayChoices);
     }
 
@@ -38,7 +37,7 @@ public class Ranking extends Question implements java.io.Serializable {
     }
 
     private void addChoices(String choice) {
-        choices.add(choice);
+        correctChoices.add(choice);
     }
 
 }
