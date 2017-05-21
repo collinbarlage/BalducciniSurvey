@@ -66,14 +66,13 @@ public class MultipleChoice extends Question implements java.io.Serializable {
         correctChoices.add(choice);
     }
 
-//    public void take(Response res) {
-//        for (int i = 0; i < correctChoices.size(); i++) {
-//            io.prompt();
-//            res.addResponse(io.getInput());
-//        }
-//    }
+    public void take(Response res) {
+        QuestionResponse qs = new QuestionResponse();
+        for (int i = 0; i < correctChoices.size(); i++) {
+            io.prompt();
+            qs.add(displayChoices.elementAt(this.fromLetter(io.getInput())));
+        }
+        res.addResponse(qs);
+    }
 
-//    public String getCorrectChoice() {
-//
-//    }
 }

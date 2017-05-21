@@ -114,6 +114,7 @@ public class Main {
 
                     case "8": //Grade
                         if(mode.equals("test")) {
+                            newTest.save(); //autosave
                             Response res = newTest.loadResponse();
                             newTest = Test.load(res.getSurveyName()+".tst");
                             res.grade(newTest);

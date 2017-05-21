@@ -1,3 +1,4 @@
+import java.util.Vector;
 
 public class Essay extends Question implements java.io.Serializable {
 
@@ -6,6 +7,11 @@ public class Essay extends Question implements java.io.Serializable {
         this.setPrompt(io.getInput());
         correctChoices.add("null"); //dummy for taking
     }
+
+    public Boolean isCorrect(Vector<String> user) {
+      return null;
+    }
+
 
     public void display() {
         io.outputln("Essay:\n\t" + this.getPrompt() + "\n");

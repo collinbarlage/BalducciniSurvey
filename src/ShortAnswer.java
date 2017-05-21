@@ -39,7 +39,12 @@ public class ShortAnswer extends Question implements java.io.Serializable {
 
     public void take(Response res) {
         io.prompt();
-        res.addResponse(io.getInput());
+        QuestionResponse qs = new QuestionResponse(io.getInput());
+        res.addResponse(qs);
+    }
+
+    public Boolean isCorrect(Vector<String> user) {
+        return (correctChoices.contains(user.elementAt(0)));
     }
 }
 

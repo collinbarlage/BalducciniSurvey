@@ -1,53 +1,49 @@
-import java.io.Serializable;
 import java.util.Vector;
 
 public class Response implements java.io.Serializable {
     IO io = new IO();
-    private Vector<String> responses = new Vector<>();
+    private Vector<QuestionResponse> questionResponses = new Vector<>();
     private String name;
     private String surveyName;
+    private int totalPoints;
+    private int userPoints;
 
     public Response(String n, String s) {
         name = n;
         surveyName = s;
     }
 
-    public String getString() {
-        return responses.elementAt(0);
-    }
+//    public String getString() {
+//        return questionResponses.elementAt(0);
+//    }
 
-    public String getString(int i) {
-        return responses.elementAt(i);
-    }
+//    public String getString(int i) {
+//        return questionResponses.elementAt(i);
+//    }
 
-    public void addResponse(String s) {
-        responses.add(s);
+    public void addResponse(QuestionResponse qs) {
+        questionResponses.add(qs);
     }
 
     public void grade(Test test) {
-        io.outputln("I'm about to grade "+test.getName());
-        //TODO
-    }
-
-    public boolean checkOne(String correct) {
-        return (this.getString().equals(correct));
-    }
-
-    public boolean checkMany(Vector<String> correct) {
-        for (int i = 0; i < correct.size(); i++) { //loop through correct answers and check if they are in responses
-            if (!responses.contains(correct.elementAt(i)))
-                return false;
+        totalPoints = 10 * questionResponses.size();
+        io.outputln("\nResults:");
+        for(int i = 0; i< questionResponses.size(); i++) {
+            io.output("\t("+i+") - ");
+            if(test.getQuestion(i).isCorrect(questionResponses.elementAt(i).getResponses()) == null) {
+                io.outputln("Pending: N/A (a human must grade this)");
+                totalPoints = totalPoints - 10;
+            }
+            else if(test.getQuestion(i).isCorrect(questionResponses.elementAt(i).getResponses())) {
+                userPoints = userPoints + 10;
+                io.outputln("Correct: 10pts");
+            }
+            else
+                io.outputln("Incorrect: 0pts");
         }
-        return (responses.size() == correct.size()); //double check that both vectors are identical
+        io.outputln("\n\tTOTAL: "+userPoints+"/"+totalPoints+"\t");
     }
 
-    public boolean checkOrder(Vector<String> correct) {
-        for (int i = 0; i < correct.size(); i++) {
-            if (!responses.elementAt(i).equals(correct.elementAt(i)))
-                return false;
-        }
-        return true;
-    }
 
     public String getName() {
         return name;

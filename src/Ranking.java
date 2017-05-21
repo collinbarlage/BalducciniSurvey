@@ -36,6 +36,29 @@ public class Ranking extends Question implements java.io.Serializable {
         io.output("\n");
     }
 
+    public void take(Response res) {
+        QuestionResponse userResponse = new QuestionResponse();
+        io.outputln("\tEnter numbers in order:");
+        for (int i = 0; i < displayChoices.size(); i++) {
+            io.prompt();
+            userResponse.add(displayChoices.elementAt(io.getNumber()));
+            System.out.println(">"+displayChoices.elementAt(io.getNumber()));
+
+        }
+        res.addResponse(userResponse);
+    }
+
+    public Boolean isCorrect(Vector<String> user) {
+        for (int i = 0; i < correctChoices.size(); i++) {
+            if (!user.elementAt(i).equals(correctChoices.elementAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+
+
+
     private void addChoices(String choice) {
         correctChoices.add(choice);
     }

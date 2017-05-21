@@ -1,12 +1,10 @@
-import com.sun.org.apache.regexp.internal.RESyntaxException;
-
 import java.io.*;
 import java.util.Vector;
 
 public class Survey implements java.io.Serializable {
     IO io = new IO();
     protected String name;
-    protected Vector<Question> questions = new Vector<Question>();
+    private Vector<Question> questions = new Vector<Question>();
     protected boolean isSurvey;
     String extention, type;
 
@@ -104,10 +102,10 @@ public class Survey implements java.io.Serializable {
                 break;
             else if (!io.getInput().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
-            else if (io.iResponse() < questions.size() && io.iResponse() >= 0) {
+            else if (io.getNumber() < questions.size() && io.getNumber() >= 0) {
                 io.output("Noice. You selected ");
-                questions.elementAt(io.iResponse()).display();
-                questions.elementAt(io.iResponse()).edit();
+                questions.elementAt(io.getNumber()).display();
+                questions.elementAt(io.getNumber()).edit();
             } else
                 io.outputln("That's not a question :(");
         }
@@ -173,12 +171,12 @@ public class Survey implements java.io.Serializable {
             io.prompt();
             if (!io.getInput().matches("^-?\\d+$"))
                 io.outputln("Enter a number, silly");
-            else if (!availableFiles.contains(io.iResponse()))
+            else if (!availableFiles.contains(io.getNumber()))
                 io.outputln("File not found :(\nEnter a number from the list above");
             else
                 break;
         }
-        return allFiles[io.iResponse()].getName(); //return name of file
+        return allFiles[io.getNumber()].getName(); //return name of file
     }
 
 
@@ -187,8 +185,8 @@ public class Survey implements java.io.Serializable {
         io.outputln("Question added\n");
     }
 
-    public Vector<Question> getQuestions() {
-        return questions;
+    public Question getQuestion(int i) {
+        return questions.elementAt(i);
     }
 
     public String getName() {

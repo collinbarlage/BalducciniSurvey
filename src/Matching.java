@@ -59,12 +59,21 @@ public class Matching extends Question implements java.io.Serializable {
     }
 
     public void take(Response res) {
-        System.out.println("OverRiding!");
+        QuestionResponse userResponse = new QuestionResponse();
         for (int i = 0; i < choicesA.size(); i++) {
             io.prompt("Enter number for "+toLetter(i));
-            res.addResponse(io.getInput());
+            userResponse.add(displayB.elementAt(io.getNumber()));
         }
+
+        res.addResponse(userResponse);
     }
 
+    public Boolean isCorrect(Vector<String> user) {
+        for(int i=0; i<user.size(); i++) {
+            if(!choicesB.contains(user.elementAt(i)))
+                return false;
+        }
+        return (user.size() == choicesB.size());
+    }
 
 }

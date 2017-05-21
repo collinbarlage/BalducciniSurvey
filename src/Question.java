@@ -19,6 +19,11 @@ public abstract class Question implements java.io.Serializable {
         return String.valueOf((char) (i + 65));
     }
 
+    public int fromLetter(String s) {
+        char c = s.charAt(0);
+        return (int)c - 65;
+    }
+
     public void edit() {
         io.output("Modifying ");
         this.display();
@@ -31,11 +36,20 @@ public abstract class Question implements java.io.Serializable {
     }
 
     public void take(Response res) {
-        System.out.println("DEFAULT TAKE METHOD!");
+        QuestionResponse userResponse = new QuestionResponse();
         for (int i = 0; i < correctChoices.size(); i++) {
             io.prompt();
-            res.addResponse(io.getInput());
+            userResponse.add(io.getInput());
         }
+        res.addResponse(userResponse);
+    }
+
+    public Boolean isCorrect(Vector<String> user) {
+        for(int i=0; i<user.size(); i++) {
+            if(!correctChoices.contains(user.elementAt(i)))
+                return false;
+        }
+        return (user.size() == correctChoices.size());
     }
 
     public void modify() {
@@ -45,6 +59,8 @@ public abstract class Question implements java.io.Serializable {
     public void display() {
         //
     }
+
+
 
 
 }

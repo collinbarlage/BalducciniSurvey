@@ -12,7 +12,7 @@ public class IO implements java.io.Serializable {
     }
 
 
-    public int iResponse() {
+    public int getNumber() {
         return Integer.parseInt(response);
     }
 
