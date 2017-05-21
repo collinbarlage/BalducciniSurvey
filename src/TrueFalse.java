@@ -7,6 +7,8 @@ public class TrueFalse extends Question implements java.io.Serializable {
 
         if (!isSurvey)
             addCorrectChoice();
+        else
+            correctChoices.add("null");
     }
 
     private void addCorrectChoice() {

@@ -71,7 +71,7 @@ public class Survey implements java.io.Serializable {
         }
     }
 
-    public void take() {
+    public Response take() {
         io.prompt("Enter your name:");
         String userName = io.getInput();
         Response res = new Response(userName, name);
@@ -92,6 +92,7 @@ public class Survey implements java.io.Serializable {
             i.printStackTrace();
         }
         io.outputln("Thanks " + userName + ". You did a great job\n");
+        return res;
     }
 
     public void edit() {

@@ -52,3 +52,6 @@ Temporary Items
 out/production/BalducciniSurvey/com/company/Main.class
 *.class
 *.xml
+*.tstr
+saves/BiggusTestus.tst
+*.srvr

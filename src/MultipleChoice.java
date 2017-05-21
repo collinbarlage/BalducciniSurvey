@@ -67,6 +67,11 @@ public class MultipleChoice extends Question implements java.io.Serializable {
     }
 
     public void take(Response res) {
+        if(correctChoices.size() == 0)
+            correctChoices.add("null");
+        if(correctChoices.size()>1){
+            io.outputln("\tPro tip: there are "+correctChoices.size()+" correct choices");
+        }
         QuestionResponse qs = new QuestionResponse();
         for (int i = 0; i < correctChoices.size(); i++) {
             io.prompt();

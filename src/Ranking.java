@@ -42,8 +42,6 @@ public class Ranking extends Question implements java.io.Serializable {
         for (int i = 0; i < displayChoices.size(); i++) {
             io.prompt();
             userResponse.add(displayChoices.elementAt(io.getNumber()));
-            System.out.println(">"+displayChoices.elementAt(io.getNumber()));
-
         }
         res.addResponse(userResponse);
     }

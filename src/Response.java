@@ -41,7 +41,7 @@ public class Response implements java.io.Serializable {
             else
                 io.outputln("Incorrect: 0pts");
         }
-        io.outputln("\n\tTOTAL: "+userPoints+"/"+totalPoints+"\t");
+        io.outputln("\n\tTOTAL: "+userPoints+"/"+totalPoints+"\t\n");
     }
 
 

@@ -51,7 +51,7 @@ public class Matching extends Question implements java.io.Serializable {
     }
 
     public void display() {
-        io.outputln("Ranking:\n\t" + this.getPrompt());
+        io.outputln("Matching:\n\t" + this.getPrompt());
         for (int i = 0; i < displayA.size(); i++) {
             io.outputColumns("\t\t(" + toLetter(i) + ") " + displayA.elementAt(i), "(" + i + ") " + displayB.elementAt(i));
         }

@@ -104,8 +104,10 @@ public class Main {
                     case "6": //Take
                         if (mode.equals("survey"))
                             newSurvey.take();
-                        else
-                            newTest.take();
+                        else {
+                            Response res = newTest.take();
+                            res.grade(newTest);
+                        }
                         break;
 
                     case "7": //Tabulate
