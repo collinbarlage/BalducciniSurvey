@@ -71,6 +71,45 @@ public class Survey implements java.io.Serializable {
         }
     }
 
+    public void tabulate() {
+        Vector<Response> responses = new Vector<Response>();
+        File saves = new File("responses/");
+        File[] allFiles = saves.listFiles();
+
+        for (int i = 0; i < allFiles.length; i++) {
+            String allFileName = allFiles[i].getName();
+            if (allFileName.substring(allFileName.indexOf("_") + 1).equals(name.concat(extention+"r"))) {
+                Response loadResponse = null;
+                try {
+                    FileInputStream fileIn = new FileInputStream("responses/" + allFiles[i].getName());
+                    ObjectInputStream in = new ObjectInputStream(fileIn);
+                    loadResponse = (Response) in.readObject();
+                    in.close();
+                    fileIn.close();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                } catch (ClassNotFoundException c) {
+                    io.outputln("File not found :(");
+                    c.printStackTrace();
+                }
+                responses.add(loadResponse);
+            }
+        }
+        if (responses.size() == 0) {
+            io.outputln("No responses yet, take this "+type+" to create a response!");
+        }
+        else {
+            io.outputln("\nStatistics for "+type+" "+name+":");
+            for(int i=0; i<questions.size(); i++) {
+                io.outputln("\n\t("+i+") "+questions.elementAt(i).getPrompt()+":");
+                questions.elementAt(i).tabulate(responses, i);
+            }
+            io.outputln("");
+        }
+    }
+
+
+
     public Response take() {
         io.prompt("Enter your name:");
         String userName = io.getInput();

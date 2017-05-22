@@ -1,3 +1,4 @@
+import java.util.Vector;
 
 public class TrueFalse extends Question implements java.io.Serializable {
 
@@ -35,8 +36,14 @@ public class TrueFalse extends Question implements java.io.Serializable {
 
     }
 
-//    public void take(Response res) {
-//        io.prompt();
-//        res.addResponse(io.getInput());
-//    }
+    public void tabulate(Vector<Response> responses, int q) {
+        int iTrue = 0, iFalse = 0;
+        for (int i = 0; i < responses.size(); i++) {
+            if(responses.elementAt(i).getQuestionResponse(q).getOne().equals("T"))
+                iTrue++;
+            if(responses.elementAt(i).getQuestionResponse(q).getOne().equals("F"))
+                iFalse++;
+        }
+        io.outputln("\t\tTrue: "+iTrue+"\n\t\tFalse: "+iFalse);
+    }
 }

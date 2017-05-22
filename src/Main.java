@@ -111,7 +111,10 @@ public class Main {
                         break;
 
                     case "7": //Tabulate
-
+                        if (mode.equals("survey"))
+                            newSurvey.tabulate();
+                        else
+                            newTest.tabulate();
                         break;
 
                     case "8": //Grade

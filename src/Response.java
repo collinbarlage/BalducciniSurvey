@@ -13,13 +13,9 @@ public class Response implements java.io.Serializable {
         surveyName = s;
     }
 
-//    public String getString() {
-//        return questionResponses.elementAt(0);
-//    }
-
-//    public String getString(int i) {
-//        return questionResponses.elementAt(i);
-//    }
+    public QuestionResponse getQuestionResponse(int i) {
+        return questionResponses.elementAt(i);
+    }
 
     public void addResponse(QuestionResponse qs) {
         questionResponses.add(qs);

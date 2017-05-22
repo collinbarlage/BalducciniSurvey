@@ -46,6 +46,32 @@ public class ShortAnswer extends Question implements java.io.Serializable {
     public Boolean isCorrect(Vector<String> user) {
         return (correctChoices.contains(user.elementAt(0)));
     }
+
+
+    public void tabulate(Vector<Response> responses, int q) {
+        int correctCount[] = new int[correctChoices.size()];
+        Vector<String> otherResponses = new Vector<String>();
+        for (int i = 0; i < responses.size(); i++) {
+            boolean wasCorrect = false;
+            for(int j=0; j<correctChoices.size(); j++) {
+                if (correctChoices.elementAt(j).equals(responses.elementAt(i).getQuestionResponse(q).getOne())) {
+                    correctCount[j]++;
+                    wasCorrect = true;
+                }
+            }
+            if(!wasCorrect)
+                otherResponses.add(responses.elementAt(i).getQuestionResponse(q).getOne());
+        }
+        if(!correctChoices.isEmpty()) {
+            for (int i = 0; i < correctChoices.size(); i++)
+                io.outputln("\t\t" + correctChoices.elementAt(i) + ":\t" + correctCount[i]);
+        }
+        io.outputln("\t\tOther responses:");
+        for(String s: otherResponses)
+            io.outputln("\t\t\t"+s);
+    }
+
+
 }
 
 

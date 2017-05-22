@@ -76,4 +76,29 @@ public class Matching extends Question implements java.io.Serializable {
         return (user.size() == choicesB.size());
     }
 
+    public void tabulate(Vector<Response> responses, int q) {
+        int correctCount = 0;
+        Vector<Vector<String>> otherResponses = new Vector<Vector<String>>();
+        for (int i = 0; i < responses.size(); i++) {
+            boolean wasCorrect = false;
+            if (choicesB.containsAll(responses.elementAt(i).getQuestionResponse(q).getResponses())) {
+                correctCount++;
+                wasCorrect = true;
+            }
+            if(!wasCorrect)
+                otherResponses.add(responses.elementAt(i).getQuestionResponse(q).getResponses());
+        }
+        io.output("\t\t");
+        for (int i = 0; i < choicesB.size(); i++)
+            io.output(    choicesB.elementAt(i) + ", ");
+        io.output("\t"+correctCount+"\n");
+
+        io.output("\t\tOther responses:\n\t\t\t");
+        for(Vector<String> ss: otherResponses) {
+            for(String s: ss)
+                io.output(s+", ");
+            io.output("\n\t\t\t");
+        }
+    }
+
 }

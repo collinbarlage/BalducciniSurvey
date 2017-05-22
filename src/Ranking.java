@@ -54,11 +54,34 @@ public class Ranking extends Question implements java.io.Serializable {
         return true;
     }
 
-
-
-
     private void addChoices(String choice) {
         correctChoices.add(choice);
+    }
+
+    public void tabulate(Vector<Response> responses, int q) {
+        int correctCount = 0;
+        Vector<Vector<String>> otherResponses = new Vector<Vector<String>>();
+        for (int i = 0; i < responses.size(); i++) {
+            boolean wasCorrect = false;
+            if (correctChoices.equals(responses.elementAt(i).getQuestionResponse(q).getResponses())) {
+                correctCount++;
+                wasCorrect = true;
+            }
+            if(!wasCorrect)
+                otherResponses.add(responses.elementAt(i).getQuestionResponse(q).getResponses());
+        }
+        if(!correctChoices.isEmpty()) {
+            io.output("\t\t");
+            for (int i = 0; i < correctChoices.size(); i++)
+                io.output(  correctChoices.elementAt(i) + ", ");
+            io.output("\t"+correctCount+"\n");
+        }
+        io.output("\t\tOther responses:\n\t\t\t");
+        for(Vector<String> ss: otherResponses) {
+            for(String s: ss)
+                io.output(s+", ");
+            io.output("\n\t\t\t");
+        }
     }
 
 }

@@ -60,6 +60,10 @@ public abstract class Question implements java.io.Serializable {
         //
     }
 
+    public void tabulate(Vector<Response> responses, int q) {
+        //
+    }
+
 
 
 

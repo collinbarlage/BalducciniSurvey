@@ -17,6 +17,12 @@ public class Essay extends Question implements java.io.Serializable {
         io.outputln("Essay:\n\t" + this.getPrompt() + "\n");
     }
 
+    public void tabulate(Vector<Response> responses, int q) {
+        for (int i = 0; i < responses.size(); i++)
+            io.outputln("\t\t"+responses.elementAt(i).getQuestionResponse(q).getOne());
+    }
+
+
 }
 
 
